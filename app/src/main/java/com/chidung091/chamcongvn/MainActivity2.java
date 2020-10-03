@@ -12,6 +12,6 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         tv = findViewById(R.id.textView);
-        tv.setText("Hello Liềng Răng!");
+        tv.setText("Hello Liềng Răng 1");
     }
 }
