@@ -47,6 +47,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        bt2.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                user.clearComposingText();
+                pass.clearComposingText();
+            }
+        });
     }
     private boolean xacthuc(String un1,String pw1){
         String un = "queanh99";
