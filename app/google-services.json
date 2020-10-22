@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "12695208229",
+    "firebase_url": "https://chamcongvn-cd.firebaseio.com",
+    "project_id": "chamcongvn-cd",
+    "storage_bucket": "chamcongvn-cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12695208229:android:61abaf8cf0c1fa15671acc",
+        "android_client_info": {
+          "package_name": "com.chidung091.chamcongvn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12695208229-i1pkajve68g4n79f13n8jthf7r6i0a3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtu8-th3qCImhmjq0H0PFWk-vAbYLRT24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12695208229-i1pkajve68g4n79f13n8jthf7r6i0a3j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "12695208229-ou4jnv4ajv5klkj36t0c7ggdrsn5au9g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "chidung.chamcongvn1"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
