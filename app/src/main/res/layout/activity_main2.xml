@@ -100,8 +100,8 @@
 
     <Button
         android:id="@+id/login2_btn"
-        android:layout_width="412dp"
-        android:layout_height="54dp"
+        android:layout_width="405dp"
+        android:layout_height="53dp"
         android:background="@drawable/backbtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try{
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         user = findViewById(R.id.emailfield);
         pass = findViewById(R.id.passfield);
         bt1 = findViewById(R.id.login_btn);

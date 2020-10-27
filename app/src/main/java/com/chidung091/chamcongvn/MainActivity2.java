@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class MainActivity2 extends Activity {
+public class MainActivity2 extends AppCompatActivity {
     EditText email,pass1,pass2,name;
     Button btt1,btt2;
     FirebaseAuth fAuth;
@@ -49,6 +49,10 @@ public class MainActivity2 extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        try{
+            this.getSupportActionBar().hide();
+        }
+        catch (NullPointerException e){}
         email = findViewById(R.id.emailfield);
         pass1 = findViewById(R.id.passfield);
         pass2 = findViewById(R.id.pass2field);
