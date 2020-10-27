@@ -4,19 +4,121 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_app"
     tools:context=".MainActivity2">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="175dp"
-        android:layout_marginTop="323dp"
-        android:layout_marginEnd="178dp"
-        android:layout_marginBottom="389dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="212dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toTopOf="@+id/emailfield"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo1" />
+
+    <EditText
+        android:id="@+id/emailfield"
+        android:layout_width="236dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="88dp"
+        android:background="@drawable/user"
+        android:ems="10"
+        android:hint="Nhập Email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <EditText
+        android:id="@+id/passfield"
+        android:layout_width="236dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="88dp"
+        android:background="@drawable/user"
+        android:ems="10"
+        android:hint="Nhập mật khẩu"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailfield" />
+
+    <EditText
+        android:id="@+id/pass2field"
+        android:layout_width="236dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="88dp"
+        android:background="@drawable/user"
+        android:ems="10"
+        android:hint="Xác thực mật khẩu"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passfield" />
+
+    <EditText
+        android:id="@+id/namefield"
+        android:layout_width="236dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="88dp"
+        android:background="@drawable/user"
+        android:ems="10"
+        android:hint="Nhập tên người dùng"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pass2field" />
+
+    <Button
+        android:id="@+id/register2_btn"
+        android:layout_width="236dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="88dp"
+        android:background="@drawable/dki"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/namefield" />
+
+    <Button
+        android:id="@+id/login2_btn"
+        android:layout_width="412dp"
+        android:layout_height="54dp"
+        android:background="@drawable/backbtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginStart="182dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="181dp"
+        android:layout_marginBottom="20dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/login2_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register2_btn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

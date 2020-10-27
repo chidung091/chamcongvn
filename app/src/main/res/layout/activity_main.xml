@@ -4,90 +4,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_app"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="177dp"
-        android:text="Chấm Công"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="103dp"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="223dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="94dp"
         android:layout_marginTop="131dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginBottom="64dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="Tên đăng nhập"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPassword3"
+        android:layout_marginEnd="94dp"
+        android:contentDescription="@string/todo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo1" />
 
     <EditText
-        android:id="@+id/editTextTextPassword3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="98dp"
+        android:id="@+id/emailfield"
+        android:layout_width="236dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="107dp"
+        android:layout_marginEnd="88dp"
+        android:background="@drawable/user"
         android:ems="10"
-        android:hint="Mật khẩu"
-        android:inputType="textPassword"
+        android:hint="@string/nh_p_email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3"
+        app:layout_constraintTop_toBottomOf="@+id/logo"
+        android:autofillHints="" />
+
+    <EditText
+        android:id="@+id/passfield"
+        android:layout_width="236dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="88dp"
+        android:background="@drawable/user"
+        android:ems="10"
+        android:hint="@string/nh_p_m_t_kh_u"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailfield"
         android:autofillHints="" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="103dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="282dp"
-        android:text="Đăng nhập"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/login_btn"
+        android:layout_width="236dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="88dp"
+        android:background="@drawable/loginbtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
+        app:layout_constraintTop_toBottomOf="@+id/passfield" />
 
     <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="34dp"
-        android:layout_marginTop="81dp"
-        android:layout_marginEnd="98dp"
-        android:layout_marginBottom="283dp"
-        android:text="Nhập lại"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword3" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="187dp"
-        android:layout_marginTop="167dp"
-        android:layout_marginEnd="166dp"
-        android:layout_marginBottom="97dp"
+        android:id="@+id/register_btn"
+        android:layout_width="412dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="137dp"
+        android:background="@drawable/taotk"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="184dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="179dp"
+        android:layout_marginBottom="69dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/register_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/login_btn" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

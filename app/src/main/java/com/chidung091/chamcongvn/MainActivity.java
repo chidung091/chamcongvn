@@ -1,71 +1,111 @@
 package com.chidung091.chamcongvn;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AlertDialog;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import java.util.HashMap;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
     Button bt1;
     Button bt2;
     EditText user;
     EditText pass;
-    TextView tv2;
-    private int counter=5;
-    TextView tv;
-    boolean isvalid=false;
+    ProgressBar pb;
+    FirebaseAuth fAuth;
+    private static final Pattern PASSWORD_PATTERN =
+            Pattern.compile("^" +
+                    //"(?=.*[0-9])" +         //at least 1 digit
+                    "(?=.*[a-z])" +         //at least 1 lower case letter
+                    "(?=.*[A-Z])" +         //at least 1 upper case letter
+                    "(?=.*[a-zA-Z])" +      //any letter
+                    //"(?=.*[@#$%^&+=])" +    //at least 1 special character
+                    "(?=\\S+$)" +           //no white spaces
+                    ".{8,}" +               //at least 8 characters
+                    "$");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        user = findViewById(R.id.editTextTextPersonName3);
-        pass = findViewById(R.id.editTextTextPassword3);
-        bt1 = findViewById(R.id.button);
-        bt2 = findViewById(R.id.button3);
-        tv = findViewById(R.id.textView4);
-        tv.setText("Bạn có 5 lần thử!");
-        bt1.setOnClickListener(new View.OnClickListener() {
+        user = findViewById(R.id.emailfield);
+        pass = findViewById(R.id.passfield);
+        bt1 = findViewById(R.id.login_btn);
+        bt2 = findViewById(R.id.register_btn);
+        pb = findViewById(R.id.progressBar);
+        fAuth = FirebaseAuth.getInstance();
+        bt1.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View view) {
-                String st1 = user.getText().toString();
-                String st2 = pass.getText().toString();
-                isvalid=xacthuc(st1,st2);
-                if(!isvalid){
-                    counter--;
-                    tv.setText("Bạn còn " + String.valueOf(counter) + " lần thử!");
-                    if (counter == 0) {
-                        bt1.setEnabled(false);
+                String em = user.getText().toString().trim();
+                String mk = pass.getText().toString().trim();
+                xacthucEmail();
+                xacthucpw();
+                pb.setVisibility(View.VISIBLE);
+                //Xac thuc nguoi dung
+                fAuth.signInWithEmailAndPassword(em,mk).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(MainActivity.this,"Đăng nhập thành công tài khoản",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this,MainActivity3.class));
+
+                        }else{
+                            Toast.makeText(MainActivity.this,"Lỗi" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            pb.setVisibility(View.INVISIBLE);
+                        }
                     }
-                }
-                else{
-                    Intent it = new Intent(MainActivity.this, MainActivity2.class);
-                    startActivity(it);
-                }
+                });
             }
         });
         bt2.setOnClickListener(new View.OnClickListener(){
+
             @Override
-            public void onClick(View v) {
-                user.clearComposingText();
-                pass.clearComposingText();
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,MainActivity2.class));
             }
         });
     }
-    private boolean xacthuc(String un1,String pw1){
-        String un = "queanh99";
-        String pw = "liengrang";
-        if((un1.equals(un)) && (pw1.equals(pw))){
-            return true;
-        }else{
+    private boolean xacthucEmail(){
+        String emailInput = user.getText().toString().trim();
+        if (emailInput.isEmpty()) {
+            user.setError("Field can't be empty");
             return false;
-            }
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()) {
+            user.setError("Please enter a valid email address");
+            return false;
+        } else {
+            user.setError(null);
+            return true;
         }
     }
+    private boolean xacthucpw(){
+        String passwordInput = pass.getText().toString().trim();
+        if (passwordInput.isEmpty()) {
+            pass.setError("Field can't be empty");
+            return false;
+        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
+            pass.setError("Password too weak");
+            return false;
+        } else {
+            pass.setError(null);
+            return true;
+        }
+    }
+}
 
