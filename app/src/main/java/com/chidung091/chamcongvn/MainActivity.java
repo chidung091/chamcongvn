@@ -1,5 +1,6 @@
 package com.chidung091.chamcongvn;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         bt1.setOnClickListener(new View.OnClickListener(){
 
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 String em = user.getText().toString().trim();
                 String mk = pass.getText().toString().trim();
                 xacthucEmail();
@@ -72,6 +74,21 @@ public class MainActivity extends AppCompatActivity {
                         }else{
                             Toast.makeText(MainActivity.this,"Lỗi" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             pb.setVisibility(View.INVISIBLE);
+                            AlertDialog.Builder dki = new AlertDialog.Builder(view.getContext());
+                            dki.setTitle("Lỗi đăng nhập!");
+                            dki.setMessage("Bạn có muốn đăng kí tài khoản không?");
+                            dki.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(new Intent(MainActivity.this,MainActivity2.class));
+                                }
+                            });
+                            dki.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
                         }
                     }
                 });
