@@ -30,21 +30,8 @@ public class MainActivity3 extends AppCompatActivity {
             this.getSupportActionBar().hide();
         }
         catch (NullPointerException e){}
-        fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
-        Userid = fAuth.getCurrentUser().getUid();
-        a = findViewById(R.id.textView);
-        DocumentReference documentReference = fStore.collection("tenngdung").document(Userid);
-        documentReference.addSnapshotListener(this,new EventListener<DocumentSnapshot>(){
-
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                a.setText(value.getString("name"));
-            }
-        });
     }
     public void logout(View view){
-        FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(MainActivity3.this,MainActivity.class));
     }
 }

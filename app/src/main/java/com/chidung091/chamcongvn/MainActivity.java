@@ -3,6 +3,8 @@ package com.chidung091.chamcongvn;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +23,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     Button bt1;
@@ -64,34 +70,15 @@ public class MainActivity extends AppCompatActivity {
                 xacthucpw();
                 pb.setVisibility(View.VISIBLE);
                 //Xac thuc nguoi dung
-                fAuth.signInWithEmailAndPassword(em,mk).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(MainActivity.this,"Đăng nhập thành công tài khoản",Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(MainActivity.this,MainActivity3.class));
-
-                        }else{
-                            Toast.makeText(MainActivity.this,"Lỗi" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            pb.setVisibility(View.INVISIBLE);
-                            AlertDialog.Builder dki = new AlertDialog.Builder(view.getContext());
-                            dki.setTitle("Lỗi đăng nhập!");
-                            dki.setMessage("Bạn có muốn đăng kí tài khoản không?");
-                            dki.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    startActivity(new Intent(MainActivity.this,MainActivity2.class));
-                                }
-                            });
-                            dki.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-
-                                }
-                            });
-                        }
-                    }
-                });
+                if(TextUtils.isEmpty(em)){
+                    Toast.makeText(MainActivity.this,"Yêu cầu nhập email",Toast.LENGTH_LONG);
+                }
+                if(TextUtils.isEmpty(mk)){
+                    Toast.makeText(MainActivity.this,"Yêu cầu nhập mật khẩu dùm",Toast.LENGTH_LONG);
+                }
+                else{
+                    Login();
+                }
             }
         });
         bt2.setOnClickListener(new View.OnClickListener(){
@@ -127,6 +114,29 @@ public class MainActivity extends AppCompatActivity {
             pass.setError(null);
             return true;
         }
+    }
+    public void Login(){
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setEmail(user.getText().toString().trim());
+        loginRequest.setPassword(user.getText().toString().trim());
+        Call<LoginResponse> loginResponseCall = ApiClient.getUserService().userLogin(loginRequest);
+        loginResponseCall.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if(response.isSuccessful()){
+                    Toast.makeText(MainActivity.this,"Đăng nhập thành công tài khoản",Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity.this,MainActivity3.class));
+                }else{
+                    Toast.makeText(MainActivity.this,"Sai thông tin đăng nhập.Vui lòng thử lại",Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this,"Lỗi "+t.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 }
 
