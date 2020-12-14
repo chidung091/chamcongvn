@@ -13,24 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 public class MainActivity2 extends AppCompatActivity {
     EditText email,pass1,pass2,name;
     Button btt1,btt2;
-    FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
     ProgressBar pb;
     String UserID;
     String TAG;
@@ -60,8 +47,6 @@ public class MainActivity2 extends AppCompatActivity {
         btt1 = findViewById(R.id.register2_btn);
         btt2 = findViewById(R.id.login2_btn);
         pb = findViewById(R.id.progressBar2);
-        fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
         btt1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -76,29 +61,6 @@ public class MainActivity2 extends AppCompatActivity {
                     pass1.setError("Hai mật khẩu không trùng khớp");
                     return;
                 }
-                    fAuth.createUserWithEmailAndPassword(em,pw1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(MainActivity2.this,"Đăng k thành công tài khoản",Toast.LENGTH_SHORT).show();
-                                UserID = fAuth.getCurrentUser().getUid();
-                                DocumentReference documentReference = fStore.collection("tenngdung").document(UserID);
-                                Map<String,Object> user = new HashMap<>();
-                                user.put("name",naem);
-                                user.put("Uid",UserID);
-                                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Log.d(TAG,"Ghi thành công:"+ UserID);
-                                    }
-                                });
-                                startActivity(new Intent(MainActivity2.this,MainActivity3.class));
-                            } else{
-                                Toast.makeText(MainActivity2.this,"Lỗi" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                                pb.setVisibility(View.INVISIBLE);
-                            }
-                        }
-                    });
             }
         });
         btt2.setOnClickListener(new View.OnClickListener() {

@@ -8,17 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-
 public class MainActivity3 extends AppCompatActivity {
     TextView a;
-    FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
     String Userid;
 
 
@@ -30,6 +21,12 @@ public class MainActivity3 extends AppCompatActivity {
             this.getSupportActionBar().hide();
         }
         catch (NullPointerException e){}
+        a = findViewById(R.id.textView);
+        Intent intent = getIntent();
+        if(intent.getExtras()!= null){
+            String token = intent.getStringExtra("data");
+            a.setText(token);
+        }
     }
     public void logout(View view){
         startActivity(new Intent(MainActivity3.this,MainActivity.class));

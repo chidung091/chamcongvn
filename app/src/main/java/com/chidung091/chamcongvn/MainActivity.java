@@ -17,10 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
 
@@ -34,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
     EditText user;
     EditText pass;
     ProgressBar pb;
-    FirebaseAuth fAuth;
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     //"(?=.*[0-9])" +         //at least 1 digit
@@ -59,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         bt1 = findViewById(R.id.login_btn);
         bt2 = findViewById(R.id.register_btn);
         pb = findViewById(R.id.progressBar);
-        fAuth = FirebaseAuth.getInstance();
         bt1.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -118,14 +112,15 @@ public class MainActivity extends AppCompatActivity {
     public void Login(){
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail(user.getText().toString().trim());
-        loginRequest.setPassword(user.getText().toString().trim());
+        loginRequest.setPassword(pass.getText().toString().trim());
         Call<LoginResponse> loginResponseCall = ApiClient.getUserService().userLogin(loginRequest);
         loginResponseCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(MainActivity.this,"Đăng nhập thành công tài khoản",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(MainActivity.this,MainActivity3.class));
+                    LoginResponse loginResponse = response.body();
+                    startActivity(new Intent(MainActivity.this,MainActivity3.class).putExtra("data",loginResponse.getToken()));
                 }else{
                     Toast.makeText(MainActivity.this,"Sai thông tin đăng nhập.Vui lòng thử lại",Toast.LENGTH_SHORT).show();
                 }
