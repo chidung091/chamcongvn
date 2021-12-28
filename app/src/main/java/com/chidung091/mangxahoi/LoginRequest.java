@@ -1,4 +1,4 @@
-package com.chidung091.chamcongvn;
+package com.chidung091.mangxahoi;
 
 public class LoginRequest {
     private String email;

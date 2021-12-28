@@ -1,6 +1,5 @@
-package com.chidung091.chamcongvn;
+package com.chidung091.mangxahoi;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,11 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -101,9 +97,6 @@ public class MainActivity extends AppCompatActivity {
         if (passwordInput.isEmpty()) {
             pass.setError("Field can't be empty");
             return false;
-        } else if (!PASSWORD_PATTERN.matcher(passwordInput).matches()) {
-            pass.setError("Password too weak");
-            return false;
         } else {
             pass.setError(null);
             return true;
@@ -117,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         loginResponseCall.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                Log.d("response",response.toString());
                 if(response.isSuccessful()){
                     Toast.makeText(MainActivity.this,"Đăng nhập thành công tài khoản",Toast.LENGTH_SHORT).show();
                     LoginResponse loginResponse = response.body();

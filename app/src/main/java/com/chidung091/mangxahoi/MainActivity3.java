@@ -1,11 +1,9 @@
-package com.chidung091.chamcongvn;
-import android.app.Activity;
+package com.chidung091.mangxahoi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity3 extends AppCompatActivity {
