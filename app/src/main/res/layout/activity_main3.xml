@@ -12,21 +12,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="154dp"
-        android:layout_marginTop="341dp"
         android:layout_marginEnd="155dp"
-        android:layout_marginBottom="342dp"
+        android:onClick="logout"
         android:text="Đăng xuất"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:onClick="logout"/>
+        tools:layout_editor_absoluteY="620dp" />
 
-    <TextView
-        android:id="@+id/textView"
+    <EditText
+        android:id="@+id/editTextTextPersonName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="178dp"
-        tools:layout_editor_absoluteY="273dp" />
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Họ tên"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="106dp" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Email"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="227dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

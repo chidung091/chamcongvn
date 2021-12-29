@@ -7,26 +7,13 @@
     android:background="@drawable/bg_app"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="223dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="94dp"
-        android:layout_marginTop="131dp"
-        android:layout_marginEnd="94dp"
-        android:contentDescription="@string/todo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo1" />
-
     <EditText
         android:id="@+id/emailfield"
         android:layout_width="236dp"
         android:layout_height="48dp"
         android:layout_marginStart="87dp"
-        android:layout_marginTop="107dp"
         android:layout_marginEnd="88dp"
+        android:autofillHints=""
         android:background="@drawable/user"
         android:ems="10"
         android:hint="@string/nh_p_email"
@@ -35,8 +22,7 @@
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
-        android:autofillHints="" />
+        tools:layout_editor_absoluteY="319dp" />
 
     <EditText
         android:id="@+id/passfield"
@@ -90,6 +76,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_btn" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="166dp"
+        android:layout_marginEnd="162dp"
+        android:layout_marginBottom="134dp"
+        android:text="HaoMaiSocial"
+        android:textColor="#E30E0E"
+        app:layout_constraintBottom_toTopOf="@+id/emailfield"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
