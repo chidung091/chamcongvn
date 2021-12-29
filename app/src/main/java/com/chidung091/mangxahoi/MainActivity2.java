@@ -4,17 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.regex.Pattern;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity2 extends AppCompatActivity {
-    EditText email,pass1,pass2,name;
-    Button btt1,btt2;
+    EditText email, pass1, pass2, name;
+    Button btt1, btt2;
     ProgressBar pb;
     String UserID;
     String TAG;
@@ -33,10 +39,10 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-        try{
+        try {
             this.getSupportActionBar().hide();
+        } catch (NullPointerException e) {
         }
-        catch (NullPointerException e){}
         email = findViewById(R.id.emailfield);
         pass1 = findViewById(R.id.passfield);
         pass2 = findViewById(R.id.pass2field);
@@ -44,7 +50,7 @@ public class MainActivity2 extends AppCompatActivity {
         btt1 = findViewById(R.id.register2_btn);
         btt2 = findViewById(R.id.login2_btn);
         pb = findViewById(R.id.progressBar2);
-        btt1.setOnClickListener(new View.OnClickListener(){
+        btt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String em = email.getText().toString().trim();
@@ -58,16 +64,18 @@ public class MainActivity2 extends AppCompatActivity {
                     pass1.setError("Hai mật khẩu không trùng khớp");
                     return;
                 }
+                Register();
             }
         });
         btt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity2.this,MainActivity.class));
+                startActivity(new Intent(MainActivity2.this, MainActivity.class));
             }
         });
     }
-    private boolean xacthucEmail(){
+
+    private boolean xacthucEmail() {
         String emailInput = email.getText().toString().trim();
         if (emailInput.isEmpty()) {
             email.setError("Field can't be empty");
@@ -80,7 +88,8 @@ public class MainActivity2 extends AppCompatActivity {
             return true;
         }
     }
-    private boolean xacthucpw(){
+
+    private boolean xacthucpw() {
         String passwordInput = pass1.getText().toString().trim();
         if (passwordInput.isEmpty()) {
             pass1.setError("Field can't be empty");
@@ -92,5 +101,32 @@ public class MainActivity2 extends AppCompatActivity {
             pass1.setError(null);
             return true;
         }
+    }
+
+    public void Register() {
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setEmail(email.getText().toString().trim());
+        registerRequest.setPassword(pass1.getText().toString().trim());
+        registerRequest.setName(name.getText().toString().trim());
+        Call<RegisterResponse> requestResponseCall = ApiClient.getUserService().userRegister(registerRequest);
+        requestResponseCall.enqueue(new Callback<RegisterResponse>() {
+            @Override
+            public void onResponse(Call<RegisterResponse> call, Response<RegisterResponse> response) {
+                Log.d("response", response.toString());
+                if (response.isSuccessful()) {
+                    Toast.makeText(MainActivity2.this, "Đăng kí thành công tài khoản", Toast.LENGTH_SHORT).show();
+                    RegisterResponse registerResponse = response.body();
+                    startActivity(new Intent(MainActivity2.this, MainActivity3.class).putExtra("data", registerResponse.getId()));
+                } else {
+                    Toast.makeText(MainActivity2.this, "Sai thông tin đăng nhập.Vui lòng thử lại", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RegisterResponse> call, Throwable t) {
+                Toast.makeText(MainActivity2.this, "Lỗi " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 }

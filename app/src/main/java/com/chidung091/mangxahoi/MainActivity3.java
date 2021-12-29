@@ -19,7 +19,6 @@ public class MainActivity3 extends AppCompatActivity {
             this.getSupportActionBar().hide();
         }
         catch (NullPointerException e){}
-        a = findViewById(R.id.textView);
         Intent intent = getIntent();
         if(intent.getExtras()!= null){
             String token = intent.getStringExtra("data");
