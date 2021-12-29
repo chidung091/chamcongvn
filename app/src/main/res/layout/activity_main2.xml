@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="162dp"
-        android:layout_marginTop="166dp"
+        android:layout_marginTop="42dp"
         android:layout_marginEnd="162dp"
         android:layout_marginBottom="134dp"
         android:text="HaoMaiSocial"
@@ -27,6 +27,7 @@
         android:layout_width="236dp"
         android:layout_height="48dp"
         android:layout_marginStart="87dp"
+        android:layout_marginTop="135dp"
         android:layout_marginEnd="88dp"
         android:background="@drawable/user"
         android:ems="10"
@@ -35,7 +36,7 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="196dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/passfield"

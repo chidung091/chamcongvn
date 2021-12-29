@@ -22,7 +22,6 @@ public class MainActivity3 extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent.getExtras()!= null){
             String token = intent.getStringExtra("data");
-            a.setText(token);
         }
     }
     public void logout(View view){
